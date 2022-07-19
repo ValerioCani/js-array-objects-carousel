@@ -51,7 +51,7 @@ imageContainer[imageSelector].classList.add('show');
 const thumbnail = document.getElementsByClassName('thumbnail');
 thumbnail[imageSelector].classList.add('show');
 
-let clock = setInterval(goRight, 1000);//variabile che imposta lo scorrere delle immagini vergo destra di default
+let clock = setInterval(goRight, 3000);//variabile che imposta lo scorrere delle immagini vergo destra di default
 let direction = true;//variabile per controllare la direzione 
 let permission = false;//variabile per evitare che, premendo più volte su play, i setInterval si accumulino 
 
@@ -132,14 +132,14 @@ function goRight(event){
 
 function clockRigth(){
     if(direction==true && permission==true){
-        clock = setInterval(goRight, 1000);
+        clock = setInterval(goRight, 3000);
     };
     permission = false;
 };
 
 function clockLeft(){
     if(direction == false && permission==true){
-    clock = setInterval(goLeft, 1000);
+    clock = setInterval(goLeft, 3000);
     };
     permission = false;
 };
