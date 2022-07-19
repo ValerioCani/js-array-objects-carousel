@@ -51,7 +51,7 @@
     display: block;
 }
 
-#prev, #next{
+#prev, #next, #play, #stop, #invert{
     position: absolute;
     height: 40px;
     width: 40px;
@@ -75,11 +75,31 @@
     transform: translatey(-50%);
 }
 
+#play{
+    bottom: 10px;
+    right: 50%;
+    transform: translatex(-50%);
+}
+
+#stop{
+    bottom: 10px;
+    left: 10px;
+}
+
+#invert{
+    bottom: 10px;
+    right: 10px;
+}
+
 #thumnails{
     width: 80%;
     height: 10vh;
     display: flex;
     margin: auto ;
+}
+
+#thumnails .thumbnail{
+    filter: brightness(50%);
 }
 
 .thumbnail img{
@@ -88,6 +108,7 @@
     object-fit:cover;
 }
 
-.thumbnail.show{
+#thumnails .thumbnail.show{
     border: solid white 2px;
+    filter: brightness(100%);
 }

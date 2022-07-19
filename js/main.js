@@ -26,7 +26,7 @@ const images = [
     }
 ];
 
-
+//sezione crazione carousel e thumbnail
 let carousel = document.getElementById('carousel');
 let thumnails = document.getElementById('thumnails');
 
@@ -43,21 +43,65 @@ for(let i=0; i<images.length; i++){
                             </div> `;
 };
 
-const thumbnail = document.getElementsByClassName('thumbnail');
-
-for(i=0; i<images.length;i++){
-    thumbnail[i].style.setProperty('width', `calc(100% / ${images.length})`);  
-}
-
-const imageContainer = document.querySelectorAll('.image');
-
-let prev = document.getElementById('prev').addEventListener('click', goLeft);
-let next = document.getElementById('next').addEventListener('click', goRight);
+//impostazione condizioni iniziali di selezione e scorrimento immagini 
 let imageSelector = 0;
-
+const imageContainer = document.querySelectorAll('.image');
 imageContainer[imageSelector].classList.add('show');
+
+const thumbnail = document.getElementsByClassName('thumbnail');
 thumbnail[imageSelector].classList.add('show');
 
+let clock = setInterval(goRight, 1000);//variabile che imposta lo scorrere delle immagini vergo destra di default
+let direction = true;//variabile per controllare la direzione 
+let permission = false;//variabile per evitare che, premendo più volte su play, i setInterval si accumulino 
+
+//sezione dimensionamento adattivo thumbnail
+for(i=0; i<images.length;i++){
+    thumbnail[i].style.setProperty('width', `calc(100% / ${images.length})`);  
+};
+
+//sezione event listeners
+let prev = document.getElementById('prev').addEventListener('click',() => { 
+    clearInterval(clock);   
+    goLeft();
+    direction = false;
+    permission = true;
+});
+
+let next = document.getElementById('next').addEventListener('click',() => {    
+    clearInterval(clock);
+    goRight();
+    direction = true;
+    permission = true;
+});
+
+let stop = document.getElementById('stop').addEventListener('click', function(){
+    clearInterval(clock);
+    permission = true;
+});
+
+let play = document.getElementById('play').addEventListener('click', function(){
+    if(direction == true){
+        clockRigth();
+    }else{
+        clockLeft();
+    };  
+});
+
+let invert = document.getElementById('invert').addEventListener('click', function(){
+    clearInterval(clock);
+    if(direction == true){
+        direction = false;
+        permission = true;
+        clockLeft();
+    }else if(direction == false){
+        direction = true;
+        permission = true;
+        clockRigth();
+    };  
+});
+
+//sezione funzioni
 function goLeft(event){
     for(let x=0; x<1; x++ ){
         imageContainer[imageSelector].classList.remove('show');
@@ -65,10 +109,11 @@ function goLeft(event){
         imageSelector--;
         if(imageSelector<0){
             imageSelector = 4;  
-        }
+        };
         imageContainer[imageSelector].classList.add('show');
         thumbnail[imageSelector].classList.add('show');
-    }
+    };
+    
 };
 
 function goRight(event){
@@ -78,9 +123,23 @@ function goRight(event){
         imageSelector++;
         if(imageSelector>4){
             imageSelector = 0;  
-        }
+        };
         imageContainer[imageSelector].classList.add('show');
         thumbnail[imageSelector].classList.add('show');
-    }
+    };
     
+};
+
+function clockRigth(){
+    if(direction==true && permission==true){
+        clock = setInterval(goRight, 1000);
+    };
+    permission = false;
+};
+
+function clockLeft(){
+    if(direction == false && permission==true){
+    clock = setInterval(goLeft, 1000);
+    };
+    permission = false;
 };
