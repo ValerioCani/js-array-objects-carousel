@@ -5,16 +5,14 @@
 }
 #container{
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #carousel{
-    max-width: 700px;
-    width: 50%;
-    height: 33vh;
+    width: 80%;
+    height: 60vh;
     position: relative;
+    margin: auto;
+    margin-top: 60px;
 }
 
 .image{
@@ -27,10 +25,29 @@
     height: 100%;
     width: 100%;
     object-fit:cover;
-    display: none;
 }
 
-#carousel .show img{
+.image img, .image h1, .image p{
+    display: none;
+} 
+
+.image h1, .image p{
+    position: absolute;
+    right: 10px;
+    color: white;
+    text-shadow: 2px 2px 3px #000000;
+}
+
+.image h1{
+    top: 10px;
+}
+
+.image p{
+    top: 50px;
+    text-align: right;
+}
+
+#carousel .show img, #carousel .show h1, #carousel .show p{
     display: block;
 }
 
@@ -56,4 +73,21 @@
     right: 10px;
     top: 50%;
     transform: translatey(-50%);
+}
+
+#thumnails{
+    width: 80%;
+    height: 10vh;
+    display: flex;
+    margin: auto ;
+}
+
+.thumbnail img{
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+}
+
+.thumbnail.show{
+    border: solid white 2px;
 }

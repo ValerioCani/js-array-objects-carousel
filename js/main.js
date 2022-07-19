@@ -28,13 +28,26 @@ const images = [
 
 
 let carousel = document.getElementById('carousel');
+let thumnails = document.getElementById('thumnails');
 
 for(let i=0; i<images.length; i++){
     
     carousel.innerHTML +=`  <div class="image">
+                                <h1>${images[i].title}</h1>
+                                <p>${images[i].description}</p>
                                 <img src="${images[i].url}">
                             </div>`;
+            
+    thumnails.innerHTML +=` <div class="thumbnail">
+                                <img src="${images[i].url}">
+                            </div> `;
 };
+
+const thumbnail = document.getElementsByClassName('thumbnail');
+
+for(i=0; i<images.length;i++){
+    thumbnail[i].style.setProperty('width', `calc(100% / ${images.length})`);  
+}
 
 const imageContainer = document.querySelectorAll('.image');
 
@@ -43,26 +56,31 @@ let next = document.getElementById('next').addEventListener('click', goRight);
 let imageSelector = 0;
 
 imageContainer[imageSelector].classList.add('show');
+thumbnail[imageSelector].classList.add('show');
 
 function goLeft(event){
     for(let x=0; x<1; x++ ){
         imageContainer[imageSelector].classList.remove('show');
+        thumbnail[imageSelector].classList.remove('show');
         imageSelector--;
         if(imageSelector<0){
             imageSelector = 4;  
         }
         imageContainer[imageSelector].classList.add('show');
+        thumbnail[imageSelector].classList.add('show');
     }
 };
 
 function goRight(event){
     for(let x=0; x<1; x++ ){
         imageContainer[imageSelector].classList.remove('show');
+        thumbnail[imageSelector].classList.remove('show');
         imageSelector++;
         if(imageSelector>4){
             imageSelector = 0;  
         }
         imageContainer[imageSelector].classList.add('show');
+        thumbnail[imageSelector].classList.add('show');
     }
     
 };
